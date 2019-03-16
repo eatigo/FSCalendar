@@ -49,7 +49,6 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 }
 
 @property (strong, nonatomic) NSCalendar *gregorian;
-@property (strong, nonatomic) NSDateFormatter *formatter;
 @property (strong, nonatomic) NSTimeZone *timeZone;
 
 @property (weak  , nonatomic) UIView                     *contentView;
@@ -191,13 +190,13 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
     contentView.backgroundColor = [UIColor clearColor];
-    contentView.clipsToBounds = YES;
+    contentView.clipsToBounds = NO;
     [self addSubview:contentView];
     self.contentView = contentView;
     
     UIView *daysContainer = [[UIView alloc] initWithFrame:CGRectZero];
     daysContainer.backgroundColor = [UIColor clearColor];
-    daysContainer.clipsToBounds = YES;
+    daysContainer.clipsToBounds = NO;
     [contentView addSubview:daysContainer];
     self.daysContainer = daysContainer;
     
@@ -214,7 +213,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.showsVerticalScrollIndicator = NO;
     collectionView.allowsMultipleSelection = NO;
-    collectionView.clipsToBounds = YES;
+    collectionView.clipsToBounds = NO;
     [collectionView registerClass:[FSCalendarCell class] forCellWithReuseIdentifier:FSCalendarDefaultCellReuseIdentifier];
     [collectionView registerClass:[FSCalendarBlankCell class] forCellWithReuseIdentifier:FSCalendarBlankCellReuseIdentifier];
     [collectionView registerClass:[FSCalendarStickyHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
@@ -1208,7 +1207,19 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     BOOL flag = YES;
     flag &= [self.gregorian components:NSCalendarUnitDay fromDate:date toDate:self.minimumDate options:0].day <= 0;
     flag &= [self.gregorian components:NSCalendarUnitDay fromDate:date toDate:self.maximumDate options:0].day >= 0;;
+    flag &= [self isDateAvailable: date];
     return flag;
+}
+
+- (BOOL)isDateAvailable:(NSDate *)date
+{
+    for (NSDate *availableDay in self.availableDates) {
+        if ([self.gregorian isDate:date inSameDayAsDate:availableDay]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 - (BOOL)isPageInRange:(NSDate *)page

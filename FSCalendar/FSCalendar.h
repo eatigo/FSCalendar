@@ -258,6 +258,11 @@ IB_DESIGNABLE
 @property (nullable, strong, nonatomic) NSDate *today;
 
 /**
+ * The array of date that should be active.
+ */
+@property (strong, nonatomic) NSArray<NSDate*> *availableDates;
+
+/**
  * The current page of calendar
  *
  * @desc In week mode, current page represents the current visible week; In month mode, it means current visible month.
@@ -356,6 +361,8 @@ IB_DESIGNABLE
  A Boolean value that determines whether users can select more than one date.
  */
 @property (assign, nonatomic) IBInspectable BOOL allowsMultipleSelection;
+
+@property (strong, nonatomic) NSDateFormatter *formatter;
 
 /**
  A Boolean value that determines whether the bounding rect changes when the displayed month of the calendar is changed.
