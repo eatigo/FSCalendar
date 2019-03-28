@@ -362,8 +362,6 @@ IB_DESIGNABLE
  */
 @property (assign, nonatomic) IBInspectable BOOL allowsMultipleSelection;
 
-@property (strong, nonatomic) NSDateFormatter *formatter;
-
 /**
  A Boolean value that determines whether the bounding rect changes when the displayed month of the calendar is changed.
  */

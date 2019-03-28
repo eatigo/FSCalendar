@@ -152,7 +152,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = @"yyyy-MM-dd";
     _locale = [NSLocale currentLocale];
-    _timeZone = [NSTimeZone localTimeZone];
+    _timeZone = [NSTimeZone timeZoneWithName:"UTC"];
     _firstWeekday = 1;
     [self invalidateDateTools];
     
