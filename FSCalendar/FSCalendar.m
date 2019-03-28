@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 }
 
 @property (strong, nonatomic) NSCalendar *gregorian;
+@property (strong, nonatomic) NSDateFormatter *formatter;
 @property (strong, nonatomic) NSTimeZone *timeZone;
 
 @property (weak  , nonatomic) UIView                     *contentView;
@@ -152,7 +153,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = @"yyyy-MM-dd";
     _locale = [NSLocale currentLocale];
-    _timeZone = [NSTimeZone timeZoneWithName:"UTC"];
+    _timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     _firstWeekday = 1;
     [self invalidateDateTools];
     
