@@ -279,6 +279,11 @@ IB_DESIGNABLE
 @property (copy, nonatomic) NSLocale *locale;
 
 /**
+ * The timezone of for calendar and date formatter
+ */
+@property (copy, nonatomic) NSTimeZone *timeZone;
+
+/**
  * The scroll direction of FSCalendar. 
  *
  * e.g. To make the calendar scroll vertically
